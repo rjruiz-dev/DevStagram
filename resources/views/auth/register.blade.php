@@ -13,7 +13,9 @@
         </div>
 
         <div class="md:w-4/12 bg-white p-6 rounded-lg shadow-xl">
-            <form>
+            {{-- action es la url a la cual queremos enviar la info --}}
+            <form action="{{ route('register') }}" method="POST" novalidate>
+                @csrf
                 {{-- mb margin botom --}}
                 <div class="mb-5">
                     <label for="name" class="mb-2 block uppercase text-gray-500 font-bold">
@@ -25,8 +27,18 @@
                         type="text"
                         placeholder="Tu Nombre" 
                         {{--  border gris, p padding de 3, w-full toma todo el ancho disp, esq redondeadas  --}}
-                        class="border p-3 w-full rounded-lg"
+                        class="border p-3 w-full rounded-lg @error('name') border-red-500 @enderror"
+                        {{-- mantiene el valor ingresado --}}
+                        value="{{ old('name') }}"
                     >
+
+                    {{-- el error  --}}
+                    @error('name')
+                        {{-- formato y color al error --}}
+                        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
                 <div class="mb-5">
                     <label for="username" class="mb-2 block uppercase text-gray-500 font-bold">
@@ -40,6 +52,12 @@
                         {{--  border gris, p padding de 3, w-full toma todo el ancho disp, esq redondeadas  --}}
                         class="border p-3 w-full rounded-lg"
                     >
+
+                    @error('username')                    
+                        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
                 <div class="mb-5">
                     <label for="email" class="mb-2 block uppercase text-gray-500 font-bold">
@@ -53,6 +71,12 @@
                         {{--  border gris, p padding de 3, w-full toma todo el ancho disp, esq redondeadas  --}}
                         class="border p-3 w-full rounded-lg"
                     >
+
+                    @error('email')                    
+                        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
                 <div class="mb-5">
                     <label for="password" class="mb-2 block uppercase text-gray-500 font-bold">
@@ -66,6 +90,12 @@
                         {{--  border gris, p padding de 3, w-full toma todo el ancho disp, esq redondeadas  --}}
                         class="border p-3 w-full rounded-lg"
                     >
+
+                    @error('password')                    
+                        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
                 <div class="mb-5">
                     <label for="password_confirmation" class="mb-2 block uppercase text-gray-500 font-bold">
