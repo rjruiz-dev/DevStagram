@@ -14,6 +14,7 @@
 
         <div class="md:w-4/12 bg-white p-6 rounded-lg shadow-xl">
             {{-- action es la url a la cual queremos enviar la info --}}
+            {{-- novalidate deshabilita la validacion de html en el email y deja disp la del servidor la que creamos --}}
             <form action="{{ route('register') }}" method="POST" novalidate>
                 @csrf
                 {{-- mb margin botom --}}
@@ -49,8 +50,8 @@
                         name="username" 
                         type="text"
                         placeholder="Tu Nombre de Usuario" 
-                        {{--  border gris, p padding de 3, w-full toma todo el ancho disp, esq redondeadas  --}}
-                        class="border p-3 w-full rounded-lg"
+                        class="border p-3 w-full rounded-lg @error('username') border-red-500 @enderror"                        
+                        value="{{ old('username') }}"
                     >
 
                     @error('username')                    
@@ -67,9 +68,9 @@
                         id="email"
                         name="email" 
                         type="email"
-                        placeholder="Tu Email de Registro" 
-                        {{--  border gris, p padding de 3, w-full toma todo el ancho disp, esq redondeadas  --}}
-                        class="border p-3 w-full rounded-lg"
+                        placeholder="Tu Email de Registro"                   
+                        class="border p-3 w-full rounded-lg @error('email') border-red-500 @enderror"                        
+                        value="{{ old('email') }}"
                     >
 
                     @error('email')                    
@@ -86,9 +87,8 @@
                         id="password"
                         name="password" 
                         type="password"
-                        placeholder="Password de Registro" 
-                        {{--  border gris, p padding de 3, w-full toma todo el ancho disp, esq redondeadas  --}}
-                        class="border p-3 w-full rounded-lg"
+                        placeholder="Password de Registro"                        
+                        class="border p-3 w-full rounded-lg @error('password') border-red-500 @enderror"
                     >
 
                     @error('password')                    
