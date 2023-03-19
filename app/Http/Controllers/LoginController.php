@@ -30,6 +30,6 @@ class LoginController extends Controller
         }
 
         // si retorna true
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index', auth()->user()->username);
     }
 }

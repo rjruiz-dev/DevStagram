@@ -23,6 +23,8 @@ class PostController extends Controller
 
         // dd($user->username);
 
-        return view('dashboard');
+        return view('dashboard', [
+            'user' => $user
+        ]);
     }
 }
