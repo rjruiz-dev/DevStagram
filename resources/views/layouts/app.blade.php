@@ -17,13 +17,23 @@
                 <h1 class="text-3xl font-black">
                     DevStagram
                 </h1>
+              
+                {{-- comprobar si un usuario esta autenticado es con helper auth()->user() --}}
+                @auth
+                    <nav class="flex gap-2 items-center">
+                        <a class="font-bold text-gray-600 text-sm" href="#">Hola <span class="font-normal">{{ auth()->user()->username }}</span></a>
+                        <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('register') }}">Cerrar Sesión</a>
+                    </nav>
+                @endauth
 
-                {{-- Se ubica del lado derecho gracias a justify-between --}}
-                {{-- gap para separar los enlaces; items-center para centrar verticalmente--}}
-                <nav class="flex gap-2 items-center">
-                    <a class="font-bold uppercase text-gray-600 text-sm" href="#">Login</a>
-                    <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('register') }}">Crear Cuenta</a>
-                </nav>
+                @guest
+                    {{-- Se ubica del lado derecho gracias a justify-between --}}
+                    {{-- gap para separar los enlaces; items-center para centrar verticalmente--}}
+                    <nav class="flex gap-2 items-center">
+                        <a class="font-bold uppercase text-gray-600 text-sm" href="#">Login</a>
+                        <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('register') }}">Crear Cuenta</a>
+                    </nav>
+                @endguest                
             </div>
         </header>
 
