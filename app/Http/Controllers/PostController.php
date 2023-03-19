@@ -9,6 +9,9 @@ class PostController extends Controller
     //
     public function index() 
     {
-        dd('Desde Muro');
+        // dd('Desde Muro');
+        
+        // Usuario autenticado actualmente
+        dd(auth()->user());
     }
 }
