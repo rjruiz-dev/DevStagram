@@ -15,7 +15,7 @@
         <div class="md:w-4/12 bg-white p-6 rounded-lg shadow-xl">
             {{-- action es la url a la cual queremos enviar la info --}}
             {{-- novalidate deshabilita la validacion de html en el email y deja disp la del servidor la que creamos --}}
-            <form novalidate>
+            <form method="POST" action="{{ route('login') }}" novalidate>
                 @csrf              
                 
                 <div class="mb-5">
