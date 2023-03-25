@@ -19,6 +19,6 @@ class ImagenController extends Controller
         // importante ('file') para reconocer el archivo
         $imagen = $request->file('file');
 
-        return response()->json(['imagen' => $imagen->extension() ]);
+        return response()->json(['imagen' => "Probando Respuesta" ]);
     }
 }
