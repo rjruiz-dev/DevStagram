@@ -3,11 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>DevStagram - @yield('titulo')</title>
+       
+        {{-- para dropzone --}}
+        @stack('styles')
+       
+        <title>DevStagram - @yield('titulo')</title>       
         
-        <!-- indicar que utilizamos vite con app.css -->
         @vite('resources/css/app.css')
+        @vite('resources/js/app.js')
 
     </head>
     <body class="bg-gray-100">
@@ -80,5 +83,5 @@
             DevStagram - Todos los derechos reservados {{ now()->year }}
         </footer>
         
-    </body>
+    </body>    
 </html>
