@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class ImagenController extends Controller
 {
@@ -19,6 +21,23 @@ class ImagenController extends Controller
         // importante ('file') para reconocer el archivo
         $imagen = $request->file('file');
 
-        return response()->json(['imagen' => "Probando Respuesta" ]);
+        // Str::uuid(): genera un id unico para cada img
+        $nombreImagen = Str::uuid() . "." . $imagen->extension();
+
+        // Usa InterventionImage pasamos la imagen que estaba en memoria a intervention para procesarla
+        $imagenServidor = Image::make($imagen);
+        
+        // Cortar la imagen a 1000x1000 px
+        $imagenServidor->fit(1000,1000);
+
+        // Mover la imagen en el sevidor 
+        $imagenPath = public_path('uploads') . '/' . $nombreImagen;
+
+        // La imagen en memoria la guardamos en uploads
+        $imagenServidor->save($imagenPath);
+
+
+
+        return response()->json(['imagen' => $nombreImagen ]);
     }
 }
