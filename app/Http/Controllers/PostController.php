@@ -48,12 +48,12 @@ class PostController extends Controller
 
         // Crear post 1 forma
         // en una misma instancia crea almacena y guarda
-        Post::create([
-            'titulo'       => $request->titulo,
-            'descripcion'  => $request->descripcion,
-            'imagen'       => $request->imagen,
-            'user_id'      => auth()->user()->id
-        ]);
+        // Post::create([
+        //     'titulo'       => $request->titulo,
+        //     'descripcion'  => $request->descripcion,
+        //     'imagen'       => $request->imagen,
+        //     'user_id'      => auth()->user()->id
+        // ]);
       
         // Crear post 2 forma
         // crea instancia nueva llena la info y guarda en db
@@ -63,6 +63,14 @@ class PostController extends Controller
         // $post->imagen = $request->imagen;
         // $post->user_id = auth()->user()->id;
         // $post->save();
+
+        // Crear post 3 forma usando la relacion definida en el modelo 
+        $request->user()->posts()->create([
+            'titulo'       => $request->titulo,
+            'descripcion'  => $request->descripcion,
+            'imagen'       => $request->imagen,
+            'user_id'      => auth()->user()->id
+        ]);
 
         // Redireccionar al usuario
         return redirect()->route('posts.index', auth()->user()->username);
