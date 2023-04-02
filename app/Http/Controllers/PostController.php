@@ -27,7 +27,7 @@ class PostController extends Controller
         // consultar la tabla posts y filtrar por el id de la url
         $posts = Post::where('user_id', $user->id)->get();
         
-        dd($posts);
+        // dd($posts);
 
         return view('dashboard', [
             'user' => $user,
