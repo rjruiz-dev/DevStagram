@@ -16,4 +16,12 @@ class Post extends Model
         'imagen',
         'user_id'
     ];
+
+    public function user() 
+    {
+        // un posts pertenece a un usuario
+        return $this->belongsTo(User::class)->select(['user', 'username']); // solo los campos que necesito traer
+        
+    }
+
 }
