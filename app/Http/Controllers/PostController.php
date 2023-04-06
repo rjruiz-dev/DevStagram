@@ -12,7 +12,8 @@ class PostController extends Controller
     public function __construct()
     {
         // protegemos con middleware, antes de mostrar el index revisa que el usuario este autentiacado
-        $this->middleware('auth');
+        // con except "este controlador va a estar protegido excepto los sig metodos"
+        $this->middleware('auth')->except(['show', 'index']);
     }
 
     public function index(User $user) 

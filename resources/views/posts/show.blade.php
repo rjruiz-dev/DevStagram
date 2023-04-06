@@ -27,6 +27,9 @@
         <div class="md:w-1/2 p-5">
             {{-- shadow = sombra --}}
             <div class="shadow bg-white p-5 mb-5">
+                
+                {{-- verifica que el usuario este auteticado para mostar p y form --}}
+                @auth
                 <p class="text-xl font-bold text-center mb-4">
                     Agrega un Nuevo Comentario
                 </p>
@@ -59,6 +62,8 @@
                         "
                     >
                 </form>
+
+                @endauth
             </div>
         </div>
    </div>
