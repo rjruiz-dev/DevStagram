@@ -20,7 +20,7 @@ class Post extends Model
     public function user() 
     {
         // un posts pertenece a un usuario
-        return $this->belongsTo(User::class)->select(['user', 'username']); // solo los campos que necesito traer
+        return $this->belongsTo(User::class)->select(['name', 'username']); // solo los campos que necesito traer
         
     }
 
