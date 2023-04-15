@@ -25,7 +25,7 @@ class ComentarioController extends Controller
             'comentario' => $request->comentario,
         ]);
 
-        // retornar e imprimir un msj
+        // retornar a la pagina anterior e imprimir msj
         return back()->with('mensaje', 'Comentario realizado correctamente');
 
     }
