@@ -23,6 +23,21 @@
                     {{ $post->descripcion }}
                 </p>
             </div>
+            
+            {{-- revisar que este autenticado --}}
+            @auth
+                {{-- comprobar la persona autenticada es la misma q creo el post? --}}
+                @if ( $post->user_id === auth()->user()->id )
+                    {{-- si es la misma muestra el boton de eliminar publicacion  --}}
+                    <form action="">
+                        <input 
+                            type="submit"
+                            value="Eliminando Publicación" 
+                            class="bg-red-500 hover:bg-red-600 p-2 rounded text-white font-bold mt-4 cursor-pointer"
+                        >
+                    </form>
+                @endif
+            @endauth
         </div>
         <div class="md:w-1/2 p-5">
             {{-- shadow = sombra --}}

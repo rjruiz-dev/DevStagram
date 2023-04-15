@@ -37,7 +37,7 @@ Route::post('/posts',           [PostController::class, 'store'])->name('posts.s
 // Route::get('/posts/{post}',     [PostController::class, 'show'])->name('posts.show');
 // Route model binding con 2 variables y 2 modelos diferentes
 Route::get('/{user:username}/posts/{post}',     [PostController::class, 'show'])->name('posts.show');
-// Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 Route::post('/{user:username}/posts/{post}',     [ComentarioController::class, 'store'])->name('comentarios.store');
 
