@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use PhpParser\Node\Expr\FuncCall;
 
 class Post extends Model
 {
@@ -29,5 +30,12 @@ class Post extends Model
         // un posts va a tener multiples comentarios
         return $this->hasMany(Comentario::class);
     }
+
+    public function likes() 
+    {
+        // un posts va a tener muchos likes
+        return $this->hasMany(Like::class);
+    }    
+
 
 }
