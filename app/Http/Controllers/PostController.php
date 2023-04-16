@@ -6,6 +6,8 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\returnSelf;
+
 class PostController extends Controller
 {
     // __construct() se ejecuta cuando es instanciada esta clase controlador
@@ -93,6 +95,18 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        dd('Eliminando ', $post->id);
+        // dd('Eliminando ', $post->id);
+
+        // if($post->user_id === auth()->user()->id){
+        //     dd('Si es la misma persona');
+        // }else {
+        //     dd('No es la misma persona');
+        // }
+
+        $this->authorize('delete', $post);
+
+        $post->delete(); // si pasa la autorizacion eliminamos el post
+
+        return redirect()->route('posts.index', auth()->user()->username);
     }
 }
