@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\File;
 use function PHPUnit\Framework\returnSelf;
 
 class PostController extends Controller
@@ -106,6 +107,14 @@ class PostController extends Controller
         $this->authorize('delete', $post);
 
         $post->delete(); // si pasa la autorizacion eliminamos el post
+
+        // Eliminar la imagen 
+        $imagen_path = public_path('uploads/' . $post->imagen);
+
+        // Si existe elimina la imagen
+        if(File::exists($imagen_path)){
+            unlink($imagen_path);
+        }
 
         return redirect()->route('posts.index', auth()->user()->username);
     }
