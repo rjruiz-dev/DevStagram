@@ -29,7 +29,9 @@
                 {{-- comprobar la persona autenticada es la misma q creo el post? --}}
                 @if ( $post->user_id === auth()->user()->id )
                     {{-- si es la misma muestra el boton de eliminar publicacion  --}}
-                    <form action="">
+                    <form method="POST" action="{{ route('posts.destroy', $post) }}">
+                        @method('DELETE') {{-- METHOD SPOOFING: permite agregar otras peticiones como put path delete al navegador ya que este soporta nativamente post y get --}}
+                        @csrf
                         <input 
                             type="submit"
                             value="Eliminando Publicación" 
