@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('comentarios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('post_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // cascade: si un usuario elimina su cuenta tambien elimina sus comentarios
+            $table->foreignId('post_id')->constrained()->onDelete('cascade'); // cascade: si un usuario elimina un post tambien elimina sus comentarios
             $table->string('comentario');
             $table->timestamps();
         });
