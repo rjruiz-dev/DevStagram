@@ -20,4 +20,17 @@ class LikeController extends Controller
         return back();
 
     }
+
+    public function destroy(Request $request, Post $post)
+    {
+        // dd('Eliminando Like');
+       
+        // en el request viene el usuario
+        // y el usuario ya tiene la relacion like asociado al modelo
+        // filtramos el post acutal y eliminamos
+        $request->user()->likes()->where('post_id', $post->id)->delete();
+
+        return back();
+
+    }
 }
