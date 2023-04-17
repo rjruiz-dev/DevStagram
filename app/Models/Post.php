@@ -37,5 +37,12 @@ class Post extends Model
         return $this->hasMany(Like::class);
     }    
 
-
+    // Revisa si un usuario ya le dio me gusta, para evitar duplicados
+    public function checkLike(User $user)
+    {
+        // likes = no como funcion, sino como la relacion sin ()
+        // con likes se posiciona en la tabla de likes
+        // contains si contiene en la columna de user_id, contiene el usuario del post?
+        return $this->likes->contains('user_id', $user->id);
+    }
 }
