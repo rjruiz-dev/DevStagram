@@ -32,7 +32,11 @@ Route::get('/login',   [LoginController::class, 'index'])->name('login');
 Route::post('/login',  [LoginController::class, 'store']); // sin nombre de ruta, toma el nombre anterior (login)
 Route::post('/logout', [LogoutController::class,'store'])->name('logout');
 
-Route::get('/{user:username}',  [PostController::class, 'index'])->name('posts.index'); // muro del usuario
+// Muestra el formulario que permite modificar el perfil 
+Route::get('/editar-perfil', [PerfilController::class, 'index'])->name('perfil.index');
+Route::post('/editar-perfil', [PerfilController::class, 'store'])->name('perfil.store');
+
+
 Route::get('/posts/create',     [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts',           [PostController::class, 'store'])->name('posts.store');
 
@@ -49,6 +53,4 @@ Route::post('/imagenes', [ImagenController::class, 'store'])->name('imagenes.sto
 Route::post('/posts/{post}/likes', [LikeController::class, 'store'])->name('posts.likes.store');
 Route::delete('/posts/{post}/likes', [LikeController::class, 'destroy'])->name('posts.likes.destroy');
 
-// Muestra el formulario que permite modificar el perfil 
-Route::get('{user:username}/editar-perfil', [PerfilController::class, 'index'])->name('perfil.index');
-Route::post('{user:username}/editar-perfil', [PerfilController::class, 'store'])->name('perfil.store');
+Route::get('/{user:username}',  [PostController::class, 'index'])->name('posts.index'); // muro del usuario

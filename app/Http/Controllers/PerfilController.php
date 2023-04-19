@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
 
 class PerfilController extends Controller
 {
@@ -14,6 +15,7 @@ class PerfilController extends Controller
     
     public function index() 
     {
-        dd('aqui se muestra el formulario');
+        // dd('aqui se muestra el formulario');
+        return view('perfil.index');
     }
 }
