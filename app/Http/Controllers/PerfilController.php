@@ -61,7 +61,8 @@ class PerfilController extends Controller
         // Guardar cambios
         $usuario = User::find(auth()->user()->id);
         $usuario->username = $request->username;
-        $usuario->imagen = $nombreImagen ?? ''; // existe el nombre o lo deja vacio
+        // Si no hay imagen en el formulario pero si tiene imagen en la base de datos, evitamos reemplazo de imagen
+        $usuario->imagen = $nombreImagen ?? auth()->user()->imagen ?? null; // existe el nombre del imagen o lo deja null
         $usuario->save();
 
         // Redireccionar 
