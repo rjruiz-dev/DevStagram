@@ -11,7 +11,12 @@
         {{-- md:w-6/12 disp largo toma 6 de 12 columnas --}}
         <div class="w-full md:w-8/12 lg:w-6/12 flex flex-col items-center md:flex-row">
             <div class="w-8/12 lg:w-6/12 px-5">
-                <img src="{{ asset('img/usuario.svg') }}" alt="imagen usuario">
+                <img src="{{ 
+                    $user->imagen ? //si cumple la condicion
+                    asset('perfiles') . '/' . $user->imagen : // ejecuta el primer asset sino el segundo asset
+                    asset('img/usuario.svg') }}" 
+                    alt="imagen usuario"
+                >
             </div>
             <div class="w-8/12 lg:w-6/12 px-5 flex flex-col items-center md:justify-center md:items-start py-10 md:py-10">
                 {{-- flex: posiciona de izq a der, username luego el lapiz de edicion --}}
