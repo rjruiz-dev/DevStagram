@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
+use Intervention\Image\Facades\Image;
 
 class PerfilController extends Controller
 {
@@ -33,6 +35,37 @@ class PerfilController extends Controller
             'username'  => ['required', 'unique:users,username,'.auth()->user()->id, 'min:3', 'max:20',
             'not_in:twitter,editar-perfil'],
         ]);
+
+        if ($request->imagen) {
+            // dd('Si hay imagen'); 
+            
+            // importante ('file') para reconocer el archivo
+            $imagen = $request->file('imagen');
+
+            // Str::uuid(): genera un id unico para cada img
+            $nombreImagen = Str::uuid() . "." . $imagen->extension();
+
+            // Usa InterventionImage pasamos la imagen que estaba en memoria a intervention para procesarla
+            $imagenServidor = Image::make($imagen);
+            
+            // Cortar la imagen a 1000x1000 px
+            $imagenServidor->fit(1000,1000);
+
+            // Mover la imagen en el sevidor 
+            $imagenPath = public_path('perfiles') . '/' . $nombreImagen;
+
+            // La imagen en memoria la guardamos en perfiles
+            $imagenServidor->save($imagenPath);
+        }
+
+        // Guardar cambios
+        $usuario = User::find(auth()->user()->id);
+        $usuario->username = $request->username;
+        $usuario->imagen = $nombreImagen ?? ''; // existe el nombre o lo deja vacio
+        $usuario->save();
+
+        // Redireccionar 
+        return redirect()->route('posts.index', $usuario->username); // al redireccionar lee el usario modificado
 
     }
 }
