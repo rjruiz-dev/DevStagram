@@ -58,33 +58,39 @@
                 {{-- Puden seguir usuarios autenticados --}}
                 @auth 
                     @if($user->id !== auth()->user()->id)
-                        {{-- Seguir --}}                    
-                        <form 
-                            {{-- $user: es el usuario al cual estamos visitando su perfil --}}                       
-                            action="{{ route('users.follow', $user) }}"
-                            method="POST"
-                        >
-                            @csrf
-                            <input 
-                                type="submit"
-                                class="bg-blue-600 text-white uppercase rounded-lg px-3 py-1 text-xs font-bold cursor-pointer"
-                                value="Seguir"    
-                            >
-                        </form>
+                        {{-- $user: es la persona que estamos visitando su perfil --}}
+                        {{-- auth()->user: el usuario que lo esta visitando --}}
+                        {{-- !$user->siguiendo( auth()->user(): esta persona no es seguidor, entoces siguelo  --}}
+                        @if ( !$user->siguiendo( auth()->user() ))                           
                         
-                        {{-- Dejar de seguir --}}
-                        <form 
-                            action="{{ route('users.unfollow', $user) }}"
-                            method="POST"
-                        >
-                            @csrf                            
-                            @method('DELETE') {{-- porque el nav solo soporta get o post --}}
-                            <input 
-                                type="submit"
-                                class="bg-red-600 text-white uppercase rounded-lg px-3 py-1 text-xs font-bold cursor-pointer"
-                                value="Dejar de Seguir"    
+                            {{-- Seguir --}}                    
+                            <form 
+                                {{-- $user: es el usuario al cual estamos visitando su perfil --}}                       
+                                action="{{ route('users.follow', $user) }}"
+                                method="POST"
                             >
-                        </form>
+                                @csrf
+                                <input 
+                                    type="submit"
+                                    class="bg-blue-600 text-white uppercase rounded-lg px-3 py-1 text-xs font-bold cursor-pointer"
+                                    value="Seguir"    
+                                >
+                            </form>
+                        @else    
+                            {{-- Dejar de seguir --}}
+                            <form 
+                                action="{{ route('users.unfollow', $user) }}"
+                                method="POST"
+                            >
+                                @csrf                            
+                                @method('DELETE') {{-- porque el nav solo soporta get o post --}}
+                                <input 
+                                    type="submit"
+                                    class="bg-red-600 text-white uppercase rounded-lg px-3 py-1 text-xs font-bold cursor-pointer"
+                                    value="Dejar de Seguir"    
+                                >
+                            </form>
+                        @endif
                     @endif
                 @endauth
             </div>
