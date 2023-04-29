@@ -9,7 +9,7 @@ class FollowerController extends Controller
 {
     // $user: la persona que estamos siguiendo 
     // $request: lo que estamos enviando, tiene la persona que esta siguiendo ese usuario
-    public function store(User $user, Request $request)
+    public function store(User $user)
     {
         // dd($user->username);
 
@@ -20,6 +20,12 @@ class FollowerController extends Controller
         // auth()->user()->id: va a ser la persona que esta autenticada
         $user->followers()->attach( auth()->user()->id );
         
+        return back();
+    }
+
+    public function destroy(User $user)
+    {
+        $user->followers()->detach( auth()->user()->id );        
         return back();
     }
 }
