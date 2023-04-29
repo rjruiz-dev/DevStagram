@@ -47,8 +47,9 @@
                 </p>
 
                 <p class="text-gray-800 text-sm mb-3 font-bold">
-                    0
-                    <span class="font-normal"> Siguiendo</span>
+                    {{ $user->followings->count() }}
+                    {{-- en base a la cantidad de seguidores muestra seguidor o seguidores --}}
+                    <span class="font-normal"> Siguiendo </span>
                 </p>
 
                 <p class="text-gray-800 text-sm mb-3 font-bold">
