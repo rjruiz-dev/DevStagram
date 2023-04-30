@@ -7,8 +7,14 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        // Para que puedan ver la pag principal tiene que estar autenticados
+        $this->middleware('auth');
+    }
+
     // controlador con un solo metodo
-    // es como un constructor, automaticamente se manda a llamar
+    // __invoke: es como un constructor, automaticamente se manda a llamar
     public function __invoke()
     {
         // Obtener a quienes seguimos
@@ -19,8 +25,9 @@ class HomeController extends Controller
         // dd( auth()->user()->followings->pluck('id')->toArray() );
         $ids = ( auth()->user()->followings->pluck('id')->toArray() );
 
-        // whereIn filtrar un arreglo por user_id
-        $posts = Post::whereIn('user_id', $ids)->paginate(20);
+        // whereIn: filtrar un arreglo por user_id
+        // latest(): las ultimas publicaciones se muestran primero
+        $posts = Post::whereIn('user_id', $ids)->latest()->paginate(20);
         // dd($posts);
 
         return view('home', [
