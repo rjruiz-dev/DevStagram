@@ -21,7 +21,7 @@ class HomeController extends Controller
 
         // whereIn filtrar un arreglo por user_id
         $posts = Post::whereIn('user_id', $ids)->paginate(20);
-        dd($posts);
+        // dd($posts);
 
         return view('home', [
             'posts' => $posts 
